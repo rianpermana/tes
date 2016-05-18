@@ -1,0 +1,59 @@
+buildscript {
+	project.ext {
+        bootVersion = '1.2.8.RELEASE'
+		cloudVersion = '1.0.0.RELEASE'
+		oauthVersion = '2.0.9.RELEASE'
+		ldapVersion = '4.1.0.RELEASE'
+		jwtVersion = '1.0.4.RELEASE'
+    }
+    repositories {
+        mavenCentral()
+        jcenter()
+    }
+    
+    dependencies {
+        classpath "org.springframework.boot:spring-boot-gradle-plugin:${project.bootVersion}"
+    }
+}
+
+apply plugin: 'eclipse'
+apply plugin: 'spring-boot'
+apply plugin: 'java'
+
+
+jar {
+    baseName = 'jr-auth-server'
+    version =  '0.0.1'
+}
+
+repositories { 
+	mavenCentral() 
+	jcenter()
+}
+dependencies {
+    compile("org.springframework.boot:spring-boot-starter-web:${project.bootVersion}")    
+    compile("org.springframework.boot:spring-boot-starter-actuator:${project.bootVersion}")
+	compile("org.springframework.boot:spring-boot-starter-data-jpa:${project.bootVersion}")
+	compile("mysql:mysql-connector-java:5.1.30")
+	compile("org.springframework.cloud:spring-cloud-config-client:${project.cloudVersion}")
+	compile("org.springframework.cloud:spring-cloud-starter-eureka:${project.cloudVersion}")	
+	compile("org.springframework.cloud:spring-cloud-starter-security:${project.cloudVersion}")
+	compile("org.springframework.boot:spring-boot-starter-security:${project.bootVersion}")
+	compile("org.springframework.security.oauth:spring-security-oauth2:${project.oauthVersion}")
+	compile("org.springframework.security:spring-security-ldap:${project.ldapVersion}")
+	compile("org.springframework.security:spring-security-jwt:${project.jwtVersion}")
+	
+    testCompile group: 'junit', name: 'junit', version: '4.+'
+    testCompile 'org.springframework:spring-test:4.0.6.RELEASE'
+}
+
+group = 'jr-mobile-backend'
+mainClassName = 'co.id.jasaraharja.microservices.auth.Application'
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+task createWrapper(type: Wrapper) {
+    gradleVersion = '2.9'
+}
+
