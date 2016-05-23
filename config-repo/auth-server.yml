@@ -1,0 +1,33 @@
+# We need to setup different context root for the auth server so that we can store separate
+# cookies for both the API gateway as well as the OAuth2 authorization server.
+server:
+  port: 8899
+  contextPath: /userauth
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+
+security:
+  user:
+    password: password
+
+# ldap:
+#   url: ldap://ns1.jasaraharja.co.id:389/
+#   manager-dn: tamu1
+#   manager-password: 123456
+#   user-search-base: OU=Tamu,OU=JASA RAHARJA,DC=jasaraharja,DC=co,DC=id
+#   user-search-filter: (sAMAccountName={0})
+#   group-search-base: OU=JASA RAHARJA,DC=jasaraharja,DC=co,DC=id
+#   group-search-filter: (memberOf={0})
+
+# ldap expecc
+ldap:
+  url: ldap://localhost:389/
+  manager-dn: cn=Manager,dc=dev,dc=expecc,dc=com
+  manager-password: welcomeexpecc
+  user-search-base: ou=people,dc=dev,dc=expecc,dc=com
+  user-search-filter: (uid={0})
+  group-search-base: ou=groups,dc=dev,dc=expecc,dc=com
+  group-search-filter: (member={0})
