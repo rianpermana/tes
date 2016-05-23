@@ -14,10 +14,8 @@ public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter
     public void configure(HttpSecurity http) throws Exception {
          // @formatter:off
          http
-         .requestMatchers().antMatchers("/me")    
-         .and()
-         .authorizeRequests()
-         .antMatchers("/me").access("#oauth2.hasScope('read')");
+         	.authorizeRequests()
+         		.anyRequest().authenticated();
          // @formatter:on
     }	
 	
